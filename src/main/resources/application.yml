@@ -5,17 +5,23 @@ spring:
     gateway:
       routes:
         - id: product
-#          uri: lb://product
           uri: http://localhost:8082/
           predicates:
             - Path=/product/**
-#          filters:
-#            - StripPrefix=1
         - id: consumer
-#          uri: lb://customer
           uri: http://localhost:8081/
           predicates:
             - Path=/customer/**
+        - id: notification
+          uri: http://localhost:8085/
+          predicates:
+            - Path=/notification/**
+        - id: security
+          uri: http://localhost:8084/
+          predicates:
+            - Path=/auth/**
+  config:
+    import: optional:secrets.yml
 server:
   port: 8083
 
