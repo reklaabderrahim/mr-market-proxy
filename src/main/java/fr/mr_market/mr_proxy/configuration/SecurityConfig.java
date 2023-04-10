@@ -20,7 +20,8 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeExchange(exchanges -> exchanges.pathMatchers(
                         "/auth/api/v1/auth/login",
-                        "/auth/api/v1/auth/register"
+                        "/auth/api/v1/auth/register",
+                        "/auth/api/v1/auth/confirm"
                 ).permitAll())
                 .authorizeExchange(exchanges -> exchanges.anyExchange().authenticated())
                 .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
