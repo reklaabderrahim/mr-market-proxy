@@ -48,7 +48,9 @@ logging:
   file:
     name: "/home/rekla/dev/logging/log"
   level:
-    org.springframework.cloud: debug
+    org:
+      springframework:
+        security: trace
     fr:
       mr_market:
         mr_proxy: debug
