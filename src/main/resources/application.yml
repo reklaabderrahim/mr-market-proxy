@@ -13,7 +13,7 @@ spring:
           predicates:
             - Path=/customer/**
         - id: notification
-          uri: http://localhost:8085/
+          uri: http://localhost:8083/
           predicates:
             - Path=/notification/**
         - id: security
@@ -23,7 +23,7 @@ spring:
   config:
     import: optional:secrets.yml
 server:
-  port: 8083
+  port: 8085
 
 management:
   endpoints:

@@ -27,7 +27,8 @@ public class SecurityConfig {
                 .authorizeExchange(exchanges -> exchanges.pathMatchers(
                         "/auth/api/v1/auth/login",
                         "/auth/api/v1/auth/register",
-                        "/auth/api/v1/auth/confirm"
+                        "/auth/api/v1/auth/confirm",
+                        "/auth/api/v1/auth/send"
                 ).permitAll())
                 .authorizeExchange(exchanges -> exchanges.anyExchange().authenticated())
                 .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
