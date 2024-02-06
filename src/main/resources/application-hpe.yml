@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: product
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/product/**
+        - id: consumer
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/customer/**
+        - id: notification
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/notification/**
+        - id: security
+          uri: http://localhost:8084/
+          predicates:
+            - Path=/auth/**
+  config:
+    import: optional:secrets.yml
+server:
+  port: 8085
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - mappings
+          - env
+          - health
+          - info
+
+logging:
+  pattern:
+    console: "%clr(%date{${LOG_DATEFORMAT_PATTERN}}){faint} %clr(${LOG_LEVEL_PATTERN}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([@project.artifactId@ @project.version@][%thread]){blue} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD}"
+    dateformat: "yyyy-MM-dd HH:mm:ss"
+    level: "%5p"
+    file: "%d{${LOG_DATEFORMAT_PATTERN}} ${LOG_LEVEL_PATTERN} [@project.artifactId@ @project.version@][%thread] --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD}"
+  exception-conversion-word: "-%wEx"
+  charset:
+    file: "utf-8"
+    console: "UTF-8"
+  file:
+    name: "/home/rekla/dev/logging/log"
+  level:
+    org:
+      springframework:
+        security: trace
+    fr:
+      mr_market:
+        mr_proxy: debug
